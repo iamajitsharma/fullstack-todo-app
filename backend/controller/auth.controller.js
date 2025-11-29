@@ -12,11 +12,6 @@ export const signUp = async (req, res, next) => {
 
     const { firstName, lastName, email, role, password } = req.body;
 
-    // Validate input BEFORE DB queries
-    // if (!name || !email || !password) {
-    //   return next(new Error("Name, Email and Password are required"));
-    // }
-
     if (password.length < 6) {
       const error = new Error("Password must be at least 6 characters long");
       error.statusCode = 400;
@@ -33,7 +28,8 @@ export const signUp = async (req, res, next) => {
     }
 
     // Hash password
-    const hashedPassword = await bcrypt.hash(password, 10);
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(password, salt);
 
     // Create user correctly inside transaction
     const newUser = await User.create(
@@ -70,6 +66,48 @@ export const signUp = async (req, res, next) => {
     }
 
     session.endSession();
+    next(error);
+  }
+};
+
+export const signIn = async (req, res, next) => {
+  try {
+    const { email, password } = req.body;
+
+    const user = await User.findOne({ email });
+
+    if (!user) {
+      const error = new Error("User not found. Check your email");
+      error.statusCode = 404;
+      throw error;
+    }
+
+    const isPasswordValid = await bcrypt.compare(password, user.password);
+
+    if (!isPasswordValid) {
+      const error = new Error("Password is invalid");
+      error.statusCode = 401;
+      throw error;
+    }
+
+    const token = jwt.sign({ userId: user._id }, JWT_SECRET, {
+      expiresIn: JWT_EXPIRES_IN,
+    });
+
+    res.status(200).json({
+      success: true,
+      message: "User signed in successfully",
+      data: {
+        token,
+        user: {
+          id: user._id,
+          name: `${user.firstName} ${user.lastName}`,
+          email: user.email,
+          role: user.role,
+        },
+      },
+    });
+  } catch (error) {
     next(error);
   }
 };

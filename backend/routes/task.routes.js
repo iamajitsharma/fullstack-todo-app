@@ -1,20 +1,23 @@
 import { Router } from "express";
+import {
+  createTask,
+  deleteTask,
+  getAllTask,
+  getUserTask,
+} from "../controller/task.controller.js";
+import authorizedMiddleware from "../middlewares/auth.middleware.js";
 
 const taskRouter = Router();
 
 // Get Task By ID
-taskRouter.get("/:id", (req, res) => {
-  res.send("Get user wise all task");
-});
-
-// Delete Task - Admin
-taskRouter.delete("/:id", (req, res) => {
-  res.send("Delete task by id");
-});
+taskRouter.post("/", authorizedMiddleware, createTask);
 
 // Get User's Task List
-taskRouter.get("/user/:id", (req, res) => {
-  res.send("Get all user task");
-});
+taskRouter.get("/user/:id", authorizedMiddleware, getUserTask);
+
+taskRouter.get("/", authorizedMiddleware, getAllTask);
+
+// Delete Task - Admin
+taskRouter.delete("/:id", authorizedMiddleware, deleteTask);
 
 export default taskRouter;
