@@ -128,7 +128,7 @@ export default function SignInForm() {
             </Field>
           </FieldGroup>
           <div className="pt-6">
-            <Button className="w-full py-5" type="submit">
+            <Button className="w-full py-5 cursor-pointer" type="submit">
               {isSubmitting ? "Signing in, please wait..." : "Sign In"}
             </Button>
           </div>

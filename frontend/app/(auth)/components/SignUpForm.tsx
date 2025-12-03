@@ -175,7 +175,7 @@ export default function SignUpForm() {
             </Field>
           </FieldGroup>
           <div className="pt-6">
-            <Button className="w-full py-5" type="submit">
+            <Button className="w-full py-5 cursor-pointer" type="submit">
               {createUser.isPending ? "Creating your account..." : "Sign Up"}
             </Button>
           </div>

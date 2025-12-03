@@ -98,6 +98,8 @@ export default function AddUpdateTaskForm() {
         status: data.status,
       });
     }
+
+    reset();
   };
 
   return (
