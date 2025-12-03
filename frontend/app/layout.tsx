@@ -25,10 +25,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={` ${poppins.variable} antialiased`}>
         <ClientWrapper>
-          <AuthProvider>
-            <Header />
-            <main>{children}</main>
-          </AuthProvider>
+          <AuthProvider>{children}</AuthProvider>
         </ClientWrapper>
       </body>
     </html>

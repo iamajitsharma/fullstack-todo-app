@@ -1,5 +1,14 @@
 "use client";
+//import node modules libraries
 import { useState } from "react";
+import Link from "next/link";
+import { zodResolver } from "@hookform/resolvers/zod";
+import * as z from "zod";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { useRouter } from "next/navigation";
+import { AlertCircleIcon, Eye, EyeOff } from "lucide-react";
+
+//import shadcn ui components
 import {
   Card,
   CardContent,
@@ -11,15 +20,13 @@ import {
 import { Field, FieldGroup, FieldLabel } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import Link from "next/link";
-import { AlertCircleIcon, Eye, EyeOff } from "lucide-react";
-import { zodResolver } from "@hookform/resolvers/zod";
-import * as z from "zod";
-import { SubmitHandler, useForm } from "react-hook-form";
-import ErrorMessage from "./ErrorMessage";
+import { Alert, AlertTitle } from "@/components/ui/alert";
+
+//import custom components
+import ErrorMessage from "@/components/common/ErrorMessage";
+
+//import custom hook
 import { useAuth } from "@/context/AuthContext";
-import { useRouter } from "next/navigation";
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 
 const schema = z.object({
   email: z.email("Please enter the valid email"),
@@ -55,7 +62,6 @@ export default function SignInForm() {
     if (!result.success) {
       setIsError(true);
       setErrorMsg(result.message);
-
       return;
     }
 

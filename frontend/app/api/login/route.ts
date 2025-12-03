@@ -1,4 +1,4 @@
-import { axiosInstance } from "@/lib/utils";
+import axiosInstance from "@/lib/axiosInstance";
 import axios from "axios";
 import { NextResponse } from "next/server";
 

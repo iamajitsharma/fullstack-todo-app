@@ -1,5 +1,8 @@
-import TaskList from "../components/TaskList";
+//import node modules libraries
 import { Metadata } from "next";
+
+//import custom components
+import TaskList from "../components/TaskList";
 
 export const metadata: Metadata = {
   title: "Todo",
@@ -7,11 +10,5 @@ export const metadata: Metadata = {
 };
 
 export default function Todo() {
-  return (
-    <section className="w-full h-full">
-      <div className="flex flex-col items-center justify-center max-w-2xl w-full h-full mx-auto p-4 ">
-        <TaskList />
-      </div>
-    </section>
-  );
+  return <TaskList />;
 }

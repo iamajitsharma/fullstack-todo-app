@@ -1,5 +1,16 @@
 "use client";
+//import node modules libraries
 import { useState } from "react";
+import { zodResolver } from "@hookform/resolvers/zod";
+import * as z from "zod";
+import { SubmitHandler, useForm } from "react-hook-form";
+import axios, { AxiosError } from "axios";
+import { useRouter } from "next/navigation";
+import { useMutation } from "@tanstack/react-query";
+import { AlertCircleIcon, Eye, EyeOff } from "lucide-react";
+import Link from "next/link";
+
+//import shadcn ui components
 import {
   Card,
   CardContent,
@@ -11,17 +22,13 @@ import {
 import { Field, FieldGroup, FieldLabel } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import Link from "next/link";
-import { AlertCircleIcon, Eye, EyeOff } from "lucide-react";
-import { zodResolver } from "@hookform/resolvers/zod";
-import * as z from "zod";
-import { SubmitHandler, useForm } from "react-hook-form";
-import ErrorMessage from "./ErrorMessage";
-import axios, { AxiosError } from "axios";
-import { useRouter } from "next/navigation";
-import { useMutation } from "@tanstack/react-query";
 import { Alert, AlertTitle } from "@/components/ui/alert";
+
+//import custom types
 import { SignUpErrorResponse, SignUpSuccessResponse } from "@/types/auth";
+
+//import custom components
+import ErrorMessage from "@/components/common/ErrorMessage";
 
 const schema = z.object({
   firstName: z

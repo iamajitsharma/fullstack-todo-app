@@ -1,5 +1,6 @@
 "use client";
-import React, { createContext, useContext, useState } from "react";
+//import node modules libraries
+import React, { createContext, useContext, useEffect, useState } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 
@@ -30,6 +31,15 @@ export default function AuthProvider({
 
   const router = useRouter();
 
+  useEffect(() => {
+    const storedUser = localStorage.getItem("user");
+
+    if (storedUser) {
+      const parsedUser = JSON.parse(storedUser);
+      setUser(parsedUser);
+    }
+  }, []);
+
   const login = async (email: string, password: string) => {
     try {
       const response = await axios.post("/api/login", {
@@ -40,6 +50,7 @@ export default function AuthProvider({
       const data = response.data;
 
       if (data.user) {
+        localStorage.setItem("user", JSON.stringify(data.user));
         setUser(data.user);
       }
 

@@ -1,7 +1,7 @@
-import { axiosInstance } from "@/lib/utils";
 import axios, { AxiosError } from "axios";
 import { NextResponse } from "next/server";
 import { SignUpSuccessResponse } from "@/types/auth";
+import axiosInstance from "@/lib/axiosInstance";
 
 export async function POST(request: Request) {
   try {

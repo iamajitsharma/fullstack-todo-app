@@ -1,4 +1,7 @@
+//import node modules libraries
 import { Metadata } from "next";
+
+//import custom components
 import SignUpForm from "../components/SignUpForm";
 
 export const metadata: Metadata = {

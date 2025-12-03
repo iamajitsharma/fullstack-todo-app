@@ -4,6 +4,7 @@ import {
   deleteTask,
   getAllTask,
   getUserTask,
+  updateTask,
 } from "../controller/task.controller.js";
 import authorizedMiddleware from "../middlewares/auth.middleware.js";
 
@@ -19,5 +20,8 @@ taskRouter.get("/", authorizedMiddleware, getAllTask);
 
 // Delete Task - Admin
 taskRouter.delete("/:id", authorizedMiddleware, deleteTask);
+
+// Update Task
+taskRouter.put("/:id", authorizedMiddleware, updateTask);
 
 export default taskRouter;
