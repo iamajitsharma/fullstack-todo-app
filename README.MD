@@ -10,15 +10,13 @@ backend/ – Powered by Express.js, MongoDB, and Arcjet middleware
 The app includes user authentication, role-based access (Admin & User), and CRUD operations for tasks.
 
 🚀 Features
-Frontend (Next.js)
+Frontend (Next.js) - https://screenrec.com/share/o53YWdmwnD
 
 User authentication (login & signup)
 
 Create, read, update, delete tasks
 
-Pagination (if implemented)
-
-Admin dashboard (if assigned)
+Pagination - Infinite Scroll
 
 Modern UI with responsive design
 
@@ -27,8 +25,6 @@ Backend (Express + MongoDB)
 JWT-based authentication
 
 Arcjet middleware for enhanced security & rate-limiting
-
-REST APIs for tasks & user management
 
 Role-based system (Admin / User)
 
