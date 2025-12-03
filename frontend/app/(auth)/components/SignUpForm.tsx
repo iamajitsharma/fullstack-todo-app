@@ -79,7 +79,7 @@ export default function SignUpForm() {
       return response.data;
     },
     onSuccess: () => {
-      router.push("/todo");
+      router.push("/sign-in");
     },
     onError: (error) => {
       console.log("Error:", error.response?.data?.message);

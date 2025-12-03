@@ -23,10 +23,6 @@ export async function POST(request: Request) {
       { status: 201 }
     );
 
-    if (data.data.token) {
-      res.cookies.set("token", data.data.token, { httpOnly: true });
-    }
-
     return res;
   } catch (error) {
     if (axios.isAxiosError(error)) {
